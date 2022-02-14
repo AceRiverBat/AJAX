@@ -1,11 +1,51 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Happy hacking!
- **/
+// let monnaie = document.querySelector(".monnaie");
 
-import confetti from 'canvas-confetti';
+// const url = "https://www.blockchain.com/ticker";
 
-confetti.create(document.getElementById('canvas'), {
-  resize: true,
-  useWorker: true,
-})({ particleCount: 200, spread: 200 });
+// let ajax = new XMLHttpRequest();
+
+// ajax.responseType = "json";
+
+// function ajaxfunction() {
+//   ajax.addEventListener("readystatechange", function () {
+//     if (ajax.readyState === ajax.DONE) {
+//       monnaie.innerHTML = ajax.response.EUR.last;
+//       console.log(ajax.response.EUR); // Par défault une DOMString
+//     }
+//   })
+//   ajax.open("GET", url);
+//   ajax.send();
+// };
+// ajaxfunction();
+
+// setInterval(ajaxfunction, 10000);
+
+let meteo = document.querySelector(".meteo");
+let temperature = document.querySelector(".temperature");
+let choix = document.querySelector(".ville");
+let ville = "Lyon";
+
+const url = 'https://api.openweathermap.org/data/2.5/weather?q=' + ville + '&appid=dc8c9152e8adaad0ec8bf635818c0d42&units=metric';
+
+let ajax = new XMLHttpRequest();
+
+ajax.responseType = "json";
+
+function ajaxfunction() {
+  ajax.addEventListener("readystatechange", function () {
+    if (ajax.readyState === ajax.DONE) {
+      choix.innerHTML = ville;
+      temperature.innerHTML = ajax.response.main.temp + " °C";
+      meteo.innerHTML = ajax.response.weather[0].description;
+    }
+  });
+  ajax.open("GET", url);
+  ajax.send();
+};
+ajaxfunction();
+
+setInterval(ajaxfunction, 10000);
+
+
+
+
